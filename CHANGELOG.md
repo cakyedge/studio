@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@zapper-fi/studio?activeTab=versions
 
+## [0.125.0](https://github.com/Zapper-fi/studio/compare/v0.124.0...v0.125.0) (2022-07-23)
+
+
+### Features
+
+* **rubicon:** Slight clean-up ([0af15de](https://github.com/Zapper-fi/studio/commit/0af15def0add0874eab89473cce5d3d9c4711703))
+
+
+### Bug Fixes
+
+* **mean-finance:** Fix liquidity for Mean Finance positions ([#905](https://github.com/Zapper-fi/studio/issues/905)) ([f8128d8](https://github.com/Zapper-fi/studio/commit/f8128d8d9ed2e356826e374943a3c4b4fae02264))
+* **rubicon:** Correct Rubicon definition name, fix Bath Token decimal issues, and add labels ([#933](https://github.com/Zapper-fi/studio/issues/933)) ([12d2c2a](https://github.com/Zapper-fi/studio/commit/12d2c2a8d24bf1c72cf896b7b9de4b0c0048486c))
+
 ## [0.124.0](https://github.com/Zapper-fi/studio/compare/v0.123.0...v0.124.0) (2022-07-22)
 
 
