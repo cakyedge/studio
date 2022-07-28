@@ -1,6 +1,6 @@
 import { Register } from '~app-toolkit/decorators';
 import { appDefinition, AppDefinition } from '~app/app.definition';
-import { AppAction, AppTag } from '~app/app.interface';
+import { AppAction, AppTag, GroupType } from '~app/app.interface';
 import { Network } from '~types/network.interface';
 
 export const PROTOFI_DEFINITION = appDefinition({
@@ -9,7 +9,21 @@ export const PROTOFI_DEFINITION = appDefinition({
   description:
     'Next generation of decentralized banking and the most advanced yield farming protocol on the Fantom network',
   url: 'https://protofi.app/',
-  groups: {},
+
+  groups: {
+    pools: {
+      id: 'pools',
+      type: GroupType.TOKEN,
+      label: 'Pools',
+    },
+
+    farms: {
+      id: 'farms',
+      type: GroupType.POSITION,
+      label: 'Farms',
+    },
+  },
+
   tags: [AppTag.DECENTRALIZED_EXCHANGE, AppTag.FARMING],
   keywords: [],
   links: {},
