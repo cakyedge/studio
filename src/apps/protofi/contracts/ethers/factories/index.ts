@@ -2,5 +2,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export { MasterchefV1__factory } from './MasterchefV1__factory';
+export { Proto__factory } from './Proto__factory';
 export { ProtofiFactory__factory } from './ProtofiFactory__factory';
 export { ProtofiLp__factory } from './ProtofiLp__factory';

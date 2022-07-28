@@ -2,9 +2,11 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { MasterchefV1 } from './MasterchefV1';
+export type { Proto } from './Proto';
 export type { ProtofiFactory } from './ProtofiFactory';
 export type { ProtofiLp } from './ProtofiLp';
 export * as factories from './factories';
 export { MasterchefV1__factory } from './factories/MasterchefV1__factory';
+export { Proto__factory } from './factories/Proto__factory';
 export { ProtofiFactory__factory } from './factories/ProtofiFactory__factory';
 export { ProtofiLp__factory } from './factories/ProtofiLp__factory';

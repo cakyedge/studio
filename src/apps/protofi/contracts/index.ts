@@ -5,6 +5,7 @@ import { ContractFactory } from '~contract/contracts';
 import { Network } from '~types/network.interface';
 
 import { MasterchefV1__factory } from './ethers';
+import { Proto__factory } from './ethers';
 import { ProtofiFactory__factory } from './ethers';
 import { ProtofiLp__factory } from './ethers';
 
@@ -20,6 +21,9 @@ export class ProtofiContractFactory extends ContractFactory {
   masterchefV1({ address, network }: ContractOpts) {
     return MasterchefV1__factory.connect(address, this.appToolkit.getNetworkProvider(network));
   }
+  proto({ address, network }: ContractOpts) {
+    return Proto__factory.connect(address, this.appToolkit.getNetworkProvider(network));
+  }
   protofiFactory({ address, network }: ContractOpts) {
     return ProtofiFactory__factory.connect(address, this.appToolkit.getNetworkProvider(network));
   }
@@ -29,5 +33,6 @@ export class ProtofiContractFactory extends ContractFactory {
 }
 
 export type { MasterchefV1 } from './ethers';
+export type { Proto } from './ethers';
 export type { ProtofiFactory } from './ethers';
 export type { ProtofiLp } from './ethers';
