@@ -19,11 +19,25 @@ export class ProtoFiPoolAddressCacheManager {
   ) {}
 
   @CacheOnInterval({
-    key: `studio:${PROTOFI_DEFINITION.id}:graph-top-pool-addresses`,
+    key: `studio:${PROTOFI_DEFINITION.id}:protofi-top-pool-addresses`,
     timeout: 15 * 60 * 1000,
   })
   private async getTopPoolAddresses() {
     return [];
+  }
+
+  @CacheOnInterval({
+    key: `studio:${PROTOFI_DEFINITION.id}:protofi-gauge-pools`,
+    timeout: 15 * 60 * 1000
+  })
+  async getGaugePoolAddresses() {
+    const gaugeProxyContract = this.contractFactory.gaugeproxy({
+        address: '0x1484Fa11a49f7683aDc1114B69FA188Ff64BAA65',
+        network,
+      })
+    
+    const gaugeLpAdresses = await gaugeProxyContract.tokens();
+    return compact(gaugeLpAdresses);
   }
 
   @CacheOnInterval({
@@ -39,9 +53,10 @@ export class ProtoFiPoolAddressCacheManager {
     const provider = this.appToolkit.getNetworkProvider(network);
     const multicall = this.appToolkit.getMulticall(network);
     const numPools = await multicall.wrap(protofiMasterChefContract).poolLength();
-
+    const v1PoolsIds = [0, 1, 2, 3, 6, 15, 19]
     const allAddresses = await Promise.all(
       range(0, Number(numPools)).map(async v => {
+        if (!v1PoolsIds.includes(v)) return false;
         const poolInfo = await multicall.wrap(protofiMasterChefContract).poolInfo(v);
         const lpTokenAddress = poolInfo.lpToken.toLowerCase();
         const lpTokenContract = this.contractFactory.protofiLp({ address: lpTokenAddress, network });
@@ -70,14 +85,15 @@ export class ProtoFiPoolAddressCacheManager {
   }
 
   async getPoolAddresses(): Promise<string[]> {
-    const [topPoolAddresses, protofiPoolAddresses, staticPoolAddresses] = await Promise.all(
+    const [topPoolAddresses, protofiPoolAddresses, gaugePoolAddresses, staticPoolAddresses] = await Promise.all(
       [
         this.getTopPoolAddresses(),
         this.getProtofiMasterChefContractPoolAddresses(),
+        this.getGaugePoolAddresses(),
         this.getStaticPoolAddresses(),
       ],
     );
 
-    return uniq([...topPoolAddresses, ...protofiPoolAddresses, ...staticPoolAddresses]);
+    return uniq([...topPoolAddresses, ...protofiPoolAddresses, ...gaugePoolAddresses, ...staticPoolAddresses]);
   }
 }

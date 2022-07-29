@@ -31,7 +31,7 @@ export class FantomProtofiPoolsTokenFetcher implements PositionFetcher<AppTokenP
       network,
       appId,
       groupId,
-      minLiquidity: 10000,
+      minLiquidity: 0,
       fee: 0.003,
       factoryAddress: '0x39720E5Fe53BEEeb9De4759cb91d8E7d42c17b76',
       resolveFactoryContract: opts => this.protofiContractFactory.protofiFactory(opts),
